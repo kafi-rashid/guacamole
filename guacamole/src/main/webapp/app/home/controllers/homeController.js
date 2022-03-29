@@ -73,6 +73,13 @@ angular.module('home').controller('homeController', ['$scope', '$injector',
 
     };
 
+    /**
+     * Calling the reboot method
+     */
+    $scope.reboot = function reboot() {
+        alert('Test')
+    };
+
     // Retrieve root groups and all descendants
     dataSourceService.apply(
         connectionGroupService.getConnectionGroupTree,
