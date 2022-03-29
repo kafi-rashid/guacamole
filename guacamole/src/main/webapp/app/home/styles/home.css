@@ -75,3 +75,10 @@ a.home-connection, .empty.balancer a.home-connection-group {
 .all-connections .connection-group.empty.balancer > .caption .icon.expand {
     display: none;
 }
+
+.btn-reboot {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    height: 100%;
+}
