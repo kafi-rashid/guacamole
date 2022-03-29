@@ -88,4 +88,5 @@ a.home-connection, .empty.balancer a.home-connection-group {
 
 .btn-reboot:hover {
     background-color: transparent;
+    box-shadow: none;
 }

@@ -6,7 +6,7 @@
         <!-- The recent connections for this user -->
         <div class="header">
             <h2>{{'HOME.SECTION_HEADER_RECENT_CONNECTIONS' | translate}}</h2>
-            <button ng-click="alert('test')" class="btn-reboot">Reboot</button>
+            <button (click)="alert('test')" class="btn-reboot">Reboot</button>
             <guac-user-menu></guac-user-menu>
         </div>
         <div class="recent-connections">
