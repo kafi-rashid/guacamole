@@ -20,8 +20,8 @@
 /**
  * The controller for the home page.
  */
-angular.module('home').controller('homeController', ['$scope', '$injector', 
-        function homeController($scope, $injector) {
+angular.module('home').controller('homeController', ['$scope', '$injector', '$http',
+        function homeController($scope, $injector, $http) {
 
     // Get required types
     var ConnectionGroup  = $injector.get('ConnectionGroup');
@@ -74,10 +74,17 @@ angular.module('home').controller('homeController', ['$scope', '$injector',
     };
 
     /**
-     * Calling the reboot method
+     * Refreshing agent
      */
-    $scope.reboot = function reboot() {
-        alert('Test')
+    $scope.refresh = function refresh() {
+        $http({
+            method: 'GET',
+            url: 'http://192.168.122.121/refreshAgent.php'
+        }).then(function successCallback(response) {
+            console.log(response)
+        }, function errorCallback(response) {
+            
+        });
     };
 
     // Retrieve root groups and all descendants
