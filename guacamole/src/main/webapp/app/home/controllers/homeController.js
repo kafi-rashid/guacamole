@@ -89,9 +89,9 @@ angular.module('home').controller('homeController', ['$scope', '$injector', '$ht
             method: 'GET',
             url: baseUrl+'/refreshAgent.php'
         }).then(function successCallback(response) {
-            $scope.isRefreshing = false;
+            // $scope.isRefreshing = false;
         }, function errorCallback(response) {
-            $scope.isRefreshing = false;
+            // $scope.isRefreshing = false;
         });
     };
 
