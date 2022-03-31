@@ -76,10 +76,12 @@ angular.module('home').controller('homeController', ['$scope', '$injector', '$ht
     /**
      * Refreshing agent
      */
+    $scope.isRefreshing = false;
     $scope.refresh = function refresh() {
+        $scope.isRefreshing = true;
         var username    = authenticationService.getCurrentUsername();
-        var baseUrl     = 'http://192.168.122.121';
-        if(username.toLowerCase() === 'agent10')          baseUrl = 'http://192.168.122.121';
+        var baseUrl     = 'http://172.105.244.228';
+        if(username.toLowerCase() === 'agent10')          baseUrl = 'http://172.105.244.228';
         else if(username.toLowerCase() === 'agent11')     baseUrl = 'http://139.162.42.69';
         else if(username.toLowerCase() === 'agent12')     baseUrl = 'http://172.105.131.123';
         else if(username.toLowerCase() === 'agent13')     baseUrl = 'http://192.46.235.177';
@@ -87,9 +89,9 @@ angular.module('home').controller('homeController', ['$scope', '$injector', '$ht
             method: 'GET',
             url: baseUrl+'/refreshAgent.php'
         }).then(function successCallback(response) {
-            console.log(response)
+            $scope.isRefreshing = false;
         }, function errorCallback(response) {
-            console.log(response)
+            $scope.isRefreshing = false;
         });
     };
 

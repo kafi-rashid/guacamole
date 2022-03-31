@@ -1,5 +1,8 @@
-
 <div class="view" ng-class="{loading: !isLoaded()}">
+
+    <div ng-if="isRefreshing" class="loading">
+        <img src="../../../images/loader.gif" alt="Loading"/>
+    </div>
 
     <div class="connection-list-ui">
 
