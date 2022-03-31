@@ -77,6 +77,8 @@ angular.module('home').controller('homeController', ['$scope', '$injector', '$ht
      * Refreshing agent
      */
     $scope.refresh = function refresh() {
+        var username = authenticationService.getCurrentUsername();
+        alert(username)
         $http({
             method: 'GET',
             url: 'http://192.168.122.121/refreshAgent.php'
