@@ -100,10 +100,13 @@ angular.module('home').controller('homeController', ['$scope', '$injector', '$in
      * Check if alive
      */
     $scope.isAlive = function isAlive(baseUrl) {
-        var sec = 0;
-        var stop = $interval(function() {
-            console.log(sec);
-            sec++;
+        var checkIsAlive = $interval(function() {
+            $http({
+                method: 'GET',
+                url: baseUrl+'/isAlive.php'
+            }).then(function successCallback(response) {
+                if(response.status == 200) $interval.cancel(checkIsAlive);
+            });
         }, 10000);
     }
 
