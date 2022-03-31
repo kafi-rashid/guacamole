@@ -91,10 +91,14 @@ a.home-connection, .empty.balancer a.home-connection-group {
     box-shadow: none;
 }
 
-.loading {
+.loader-overlay {
     position: fixed;
     height: 100vh;
     width: 100vw;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -102,6 +106,6 @@ a.home-connection, .empty.balancer a.home-connection-group {
     z-index: 2;
 }
 
-.loading img {
+.loader-overlay img {
     width: 150px;
 }
