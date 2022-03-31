@@ -21,7 +21,7 @@
  * The controller for the home page.
  */
 angular.module('home').controller('homeController', ['$scope', '$injector', '$interval', '$http',
-        function homeController($scope, $injector, $http) {
+        function homeController($scope, $injector, $interval, $http) {
 
     // Get required types
     var ConnectionGroup  = $injector.get('ConnectionGroup');
@@ -101,7 +101,7 @@ angular.module('home').controller('homeController', ['$scope', '$injector', '$in
      */
     $scope.isAlive = function isAlive(baseUrl) {
         var sec = 0;
-        stop = $interval(function() {
+        var stop = $interval(function() {
             console.log(sec);
             sec++;
         }, 10000);
