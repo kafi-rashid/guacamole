@@ -20,7 +20,7 @@
 /**
  * The controller for the home page.
  */
-angular.module('home').controller('homeController', ['$scope', '$injector', '$http',
+angular.module('home').controller('homeController', ['$scope', '$injector', '$interval', '$http',
         function homeController($scope, $injector, $http) {
 
     // Get required types
@@ -89,11 +89,23 @@ angular.module('home').controller('homeController', ['$scope', '$injector', '$ht
             method: 'GET',
             url: baseUrl+'/refreshAgent.php'
         }).then(function successCallback(response) {
-            // $scope.isRefreshing = false;
+
         }, function errorCallback(response) {
-            // $scope.isRefreshing = false;
+
         });
+        $scope.isAlive(baseUrl);
     };
+
+    /**
+     * Check if alive
+     */
+    $scope.isAlive = function isAlive(baseUrl) {
+        var sec = 0;
+        stop = $interval(function() {
+            console.log(sec);
+            sec++;
+        }, 10000);
+    }
 
     // Retrieve root groups and all descendants
     dataSourceService.apply(
