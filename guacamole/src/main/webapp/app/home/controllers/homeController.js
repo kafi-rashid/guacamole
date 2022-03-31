@@ -77,15 +77,19 @@ angular.module('home').controller('homeController', ['$scope', '$injector', '$ht
      * Refreshing agent
      */
     $scope.refresh = function refresh() {
-        var username = authenticationService.getCurrentUsername();
-        alert(username)
+        var username    = authenticationService.getCurrentUsername();
+        var baseUrl     = 'http://192.168.122.121';
+        if(username.toLowerCase() === 'agent10')          baseUrl = 'http://192.168.122.121';
+        else if(username.toLowerCase() === 'agent11')     baseUrl = 'http://139.162.42.69';
+        else if(username.toLowerCase() === 'agent12')     baseUrl = 'http://172.105.131.123';
+        else if(username.toLowerCase() === 'agent13')     baseUrl = 'http://192.46.235.177';
         $http({
             method: 'GET',
-            url: 'http://192.168.122.121/refreshAgent.php'
+            url: baseUrl+'/refreshAgent.php'
         }).then(function successCallback(response) {
             console.log(response)
         }, function errorCallback(response) {
-            
+            console.log(response)
         });
     };
 
