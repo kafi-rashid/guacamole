@@ -90,8 +90,6 @@ angular.module('home').controller('homeController', ['$scope', '$injector', '$in
             url: baseUrl+'/refreshAgent.php'
         }).then(function successCallback(response) {
 
-        }, function errorCallback(response) {
-
         });
         $scope.isAlive(baseUrl);
     };
@@ -99,15 +97,19 @@ angular.module('home').controller('homeController', ['$scope', '$injector', '$in
     /**
      * Check if alive
      */
+    $scope.intervalPeriod = 10000;
     $scope.isAlive = function isAlive(baseUrl) {
         var checkIsAlive = $interval(function() {
             $http({
                 method: 'GET',
                 url: baseUrl+'/isAlive.php'
             }).then(function successCallback(response) {
-                if(response.status == 200) $interval.cancel(checkIsAlive);
+                if(response.status == 200) {
+                    $interval.cancel(checkIsAlive);
+                    $scope.isRefreshing = false;
+                }
             });
-        }, 10000);
+        }, $scope.intervalPeriod);
     }
 
     // Retrieve root groups and all descendants
