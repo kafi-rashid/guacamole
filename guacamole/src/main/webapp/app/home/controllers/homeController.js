@@ -80,11 +80,11 @@ angular.module('home').controller('homeController', ['$scope', '$injector', '$in
     $scope.refresh = function refresh() {
         $scope.isRefreshing = true;
         var username    = authenticationService.getCurrentUsername();
-        var baseUrl     = 'https://cors-anywhere.herokuapp.com/http://172.105.244.228';
-        if(username.toLowerCase() === 'agent10')          baseUrl = 'https://cors-anywhere.herokuapp.com/http://172.105.244.228';
-        else if(username.toLowerCase() === 'agent11')     baseUrl = 'https://cors-anywhere.herokuapp.com/http://139.162.42.69';
-        else if(username.toLowerCase() === 'agent12')     baseUrl = 'https://cors-anywhere.herokuapp.com/http://172.105.131.123';
-        else if(username.toLowerCase() === 'agent13')     baseUrl = 'https://cors-anywhere.herokuapp.com/http://192.46.235.177';
+        var baseUrl     = 'http://172.105.244.228';
+        if(username.toLowerCase() === 'agent10')          baseUrl = 'http://172.105.244.228';
+        else if(username.toLowerCase() === 'agent11')     baseUrl = 'http://139.162.42.69';
+        else if(username.toLowerCase() === 'agent12')     baseUrl = 'http://172.105.131.123';
+        else if(username.toLowerCase() === 'agent13')     baseUrl = 'http://192.46.235.177';
         $http({
             method: 'GET',
             url: baseUrl+'/refreshAgent.php',
@@ -103,6 +103,7 @@ angular.module('home').controller('homeController', ['$scope', '$injector', '$in
      */
     $scope.intervalPeriod = 10000;
     $scope.isAlive = function isAlive(baseUrl) {
+        var numCalls = 10;
         var checkIsAlive = $interval(function() {
             $http({
                 method: 'GET',
@@ -116,6 +117,13 @@ angular.module('home').controller('homeController', ['$scope', '$injector', '$in
                     $interval.cancel(checkIsAlive);
                     $scope.isRefreshing = false;
                 }
+                else if(numCalls === 0) {
+                    $interval.cancel(checkIsAlive);
+                    $scope.isRefreshing = false;
+                    alert(`Couldn't connect to server. Please try again later.`)
+                }
+            }, function errorCallback(response) {
+                numCalls--;
             });
         }, $scope.intervalPeriod);
     }
