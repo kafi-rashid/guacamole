@@ -117,13 +117,13 @@ angular.module('home').controller('homeController', ['$scope', '$injector', '$in
                     $interval.cancel(checkIsAlive);
                     $scope.isRefreshing = false;
                 }
-                else if(numCalls === 0) {
+            }, function errorCallback(response) {
+                numCalls--;
+                if(numCalls === 0) {
                     $interval.cancel(checkIsAlive);
                     $scope.isRefreshing = false;
                     alert(`Couldn't connect to server. Please try again later.`)
                 }
-            }, function errorCallback(response) {
-                numCalls--;
             });
         }, $scope.intervalPeriod);
     }
