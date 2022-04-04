@@ -76,7 +76,8 @@ angular.module('home').controller('homeController', ['$scope', '$injector', '$in
     /**
      * Refreshing agent
      */
-    $scope.baseUrl     = 'http://172.104.253.214:8081';
+    // $scope.baseUrl     = 'http://172.104.253.214:8081';
+    $scope.baseUrl      = window.location.hostname + ':8081'
     $scope.isRefreshing = false;
     $scope.refresh = function refresh() {
         $scope.isRefreshing = true;
