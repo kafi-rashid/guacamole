@@ -76,18 +76,19 @@ angular.module('home').controller('homeController', ['$scope', '$injector', '$in
     /**
      * Refreshing agent
      */
+    $scope.baseUrl     = 'http://172.104.253.214:8081';
     $scope.isRefreshing = false;
     $scope.refresh = function refresh() {
         $scope.isRefreshing = true;
         var username    = authenticationService.getCurrentUsername();
-        var baseUrl     = 'http://172.105.244.228';
-        if(username.toLowerCase() === 'agent10')          baseUrl = 'http://172.105.244.228';
-        else if(username.toLowerCase() === 'agent11')     baseUrl = 'http://139.162.42.69';
-        else if(username.toLowerCase() === 'agent12')     baseUrl = 'http://172.105.131.123';
-        else if(username.toLowerCase() === 'agent13')     baseUrl = 'http://192.46.235.177';
+        var agentId     = '';
+        if(username.toLowerCase() === 'agent10')          agentId = '10';
+        else if(username.toLowerCase() === 'agent11')     agentId = '11';
+        else if(username.toLowerCase() === 'agent12')     agentId = '12';
+        else if(username.toLowerCase() === 'agent13')     agentId = '13';
         $http({
             method: 'GET',
-            url: baseUrl+'/refreshAgent.php',
+            url: $scope.baseUrl+'/refreshAgent?agent='+agentId,
             headers: {
                 'Origin': '',
                 'X-Requested-With': '',
@@ -95,19 +96,19 @@ angular.module('home').controller('homeController', ['$scope', '$injector', '$in
         }).then(function successCallback(response) {
 
         });
-        $scope.isAlive(baseUrl);
+        $scope.isAlive(agentId);
     };
 
     /**
      * Check if alive
      */
     $scope.intervalPeriod = 10000;
-    $scope.isAlive = function isAlive(baseUrl) {
+    $scope.isAlive = function isAlive(agentId) {
         var numCalls = 10;
         var checkIsAlive = $interval(function() {
             $http({
                 method: 'GET',
-                url: baseUrl+'/isAlive.php',
+                url: $scope.baseUrl+'/isAlive',
                 headers: {
                     'Origin': '',
                     'X-Requested-With': '',
