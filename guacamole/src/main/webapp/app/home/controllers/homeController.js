@@ -90,10 +90,10 @@ angular.module('home').controller('homeController', ['$scope', '$injector', '$in
         $http({
             method: 'GET',
             url: $scope.baseUrl+'/refreshAgent?agent='+agentId,
-            headers: {
-                'Origin': '',
-                'X-Requested-With': '',
-            },
+            // headers: {
+            //     'Origin': '',
+            //     'X-Requested-With': '',
+            // },
         }).then(function successCallback(response) {
 
         });
@@ -110,10 +110,10 @@ angular.module('home').controller('homeController', ['$scope', '$injector', '$in
             $http({
                 method: 'GET',
                 url: $scope.baseUrl+'/isAlive',
-                headers: {
-                    'Origin': '',
-                    'X-Requested-With': '',
-                },
+                // headers: {
+                //     'Origin': '',
+                //     'X-Requested-With': '',
+                // },
             }).then(function successCallback(response) {
                 if(response.status == 200) {
                     $interval.cancel(checkIsAlive);
